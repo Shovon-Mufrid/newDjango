@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <!-- <h2>THIS IS A HTML FORM</h2>
+    <form action="" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="" required>
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" value="" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" value="" required>
+
+        <input type="submit" name="submit" value="Submit">
+    </form>
+     -->
+    <hr>
+    <!-- new form from form.py -->
+    <div>
+        <h2>THIS IS A PYTHON FORM</h2>
+        <form action="" method="post">
+            {{newForm.as_p}}
+            {% csrf_token %}
+        <input type="submit" name="submit" value="Submit">   
+        </form>
+
+        <hr>
+
+        <!-- {% if form_submitted %}
+        <p>Name : {{user_name}}</p>
+        <p>Date of Birth : {{user_dob}}</p>
+        <p>Email : {{user_email}}</p>
+        <p>Password : {{user_pass}}</p>
+        <p>Nationality : {{nationality}}</p>
+        <p>Born : {{born}}</p>
+        <p>Favourite Number : {{fav_num}}</p> 
+        
+        <p>{{field}}</p> 
+        <p> {{ boolean }} Are you sure you want to accept our terms & policy <a href="#">link</a></p>
+        {% endif %} -->
+
+    </div>
+    <hr>
+</body>
+</html>
