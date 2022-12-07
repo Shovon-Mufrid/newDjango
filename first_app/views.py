@@ -63,6 +63,10 @@ def form(request):
    return render(request, 'first_app/form.html', context=dictionary)
 
 
+def contact(request):
+   dictionary = {'text_1': Album.objects.get(pk=2), 'text_2': 'Sample text: '}
+   return render(request, 'first_app/contact.html', context=dictionary)
+
 
 # def index(request):
 #     return HttpResponse("<h1>HELLO WORLD!</h2> <a href='/first_app/contact/'> Contact </a> <a href='/first_app/about/'>About</a>")

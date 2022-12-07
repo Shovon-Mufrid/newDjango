@@ -1,0 +1,11 @@
+<!-- 7.1 -->
+<!DOCTYPE html>
+{% extends 'first_app/base.html' %}
+
+{% load filters %} <!-- load filter.py file from templatetag -->
+{% block body_block %}
+<h2>{{text_1.release_date|date:"D d M Y"}}</h2>
+
+
+<h2>{{text_2|custom_filter:"How are You?"}}</h2>
+{% endblock %}
