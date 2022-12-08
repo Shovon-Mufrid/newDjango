@@ -3,27 +3,60 @@ from django.http import HttpResponse
 from first_app.models import Musician, Album
 from templates.first_app import forms 
 
+
 # Create your views here.
 # view name is index
 # parameter is request / or anything, its varible type
 
-# templates
 def index(request):
-   musician_list = Musician.objects.order_by('first_name')
-   dictionary = { 'text_1' : 'List of Musicians' , 'musician' : musician_list }
-   return render(request, 'first_app/index.html', context=dictionary)
+   dictionary = {'title':"Home Page"}
+   return render(request, 'second_app/index.html', context = dictionary)
+
+def album_list(request):
+   dictionary = {'title':"List of album"}
+   return render(request, 'second_app/album_list.html', context=dictionary)
+
+def musician_form(request):
+   dictionary = {'title' :'Add Musician'}
+   return render(request, 'second_app/musician_form.html', context=dictionary)
+
+def album_form(request):
+   dictionary = {'title' :'Add Album'}
+   return render(request, 'second_app/album_form.html', context=dictionary)
 
 
-def form(request):
-   # sumitting form in DATABASE
-   newForm = forms.Musician_form()
 
-   if request.method == 'POST':
-      newForm = forms.Musician_form(request.POST)
 
-      if newForm.is_valid():
-         newForm.save(commit=True) #save info in databse
-         return index(request) #call data to index.html page
+
+
+
+
+
+
+
+
+
+
+
+
+# remv for vid 8.2
+# templates
+# def index(request):
+#    musician_list = Musician.objects.order_by('first_name')
+#    dictionary = { 'text_1' : 'List of Musicians' , 'musician' : musician_list }
+#    return render(request, 'first_app/index.html', context=dictionary)
+
+# rmv vid 8.2
+# def form(request):
+#    # sumitting form in DATABASE
+#    newForm = forms.Musician_form()
+
+#    if request.method == 'POST':
+#       newForm = forms.Musician_form(request.POST)
+
+#       if newForm.is_valid():
+#          newForm.save(commit=True) #save info in databse
+#          return index(request) #call data to index.html page
       
    # 3.7 videos
    # newForm = forms.user_form  # form.py>>> form is for form.py, user_form is class name
@@ -59,13 +92,21 @@ def form(request):
          # dictionary.update({'field': 'field matched' })
          # dictionary.update({'form_submitted': 'Yes'})
 
-   dictionary = {'newForm': newForm}
-   return render(request, 'first_app/form.html', context=dictionary)
+# rmv vid 8.2
+#    dictionary = {'newForm': newForm}
+#    return render(request, 'first_app/form.html', context=dictionary)
 
 
-def contact(request):
-   dictionary = {'text_1': Album.objects.get(pk=2), 'text_2': 'Sample text: '}
-   return render(request, 'first_app/contact.html', context=dictionary)
+# def contact(request):
+#    dictionary = {'text_1': Album.objects.get(pk=2), 'text_2': 'Sample text: '}
+#    return render(request, 'first_app/contact.html', context=dictionary)
+
+
+
+
+
+
+
 
 
 # def index(request):

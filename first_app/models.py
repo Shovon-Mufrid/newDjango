@@ -8,6 +8,10 @@ class Musician(models.Model):
     last_name = models.CharField(max_length=30)
     instrument = models.CharField(max_length=100)
 
+    # video 8.1 name changing
+    # class Meta:
+    #   db_table = "Musician"
+
       # to check output data
     def __str__(self):
      return self.first_name + " " + self.last_name + self.instrument    
@@ -28,6 +32,9 @@ class Album(models.Model):
     )
 
     num_starts = models.IntegerField(choices=rating)
+
+    # class Meta:
+    #   db_table = "Album"
 
     def __str__(self):
       return self.name +  ", Rating:" + str(self.num_starts)
