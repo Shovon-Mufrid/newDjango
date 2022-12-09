@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from first_app.models import Musician, Album
-from templates.first_app import forms 
+from templates.second_app import forms 
 
 
 # Create your views here.
@@ -9,7 +9,11 @@ from templates.first_app import forms
 # parameter is request / or anything, its varible type
 
 def index(request):
-   dictionary = {'title':"Home Page"}
+   # msuician form
+   musician_list = Musician.objects.order_by('first_name')
+   # album_list = Album.objects.order_by('first_name')
+
+   dictionary = {'title':"Home Page", 'musician_list': musician_list}
    return render(request, 'second_app/index.html', context = dictionary)
 
 def album_list(request):
@@ -17,11 +21,29 @@ def album_list(request):
    return render(request, 'second_app/album_list.html', context=dictionary)
 
 def musician_form(request):
-   dictionary = {'title' :'Add Musician'}
+   form = forms.MusicianForm()
+
+   if request.method == 'POST':
+      form = forms.MusicianForm(request.POST)
+
+      if form.is_valid():
+         form.save(commit=True)
+         return index(request) #if submit successful, it will take me to index page
+
+   dictionary = {'title' :'Add Musician', 'musician_form': form}
    return render(request, 'second_app/musician_form.html', context=dictionary)
 
 def album_form(request):
-   dictionary = {'title' :'Add Album'}
+   form = forms.AlbumForm()
+
+   if request.method == 'POST':
+      form = forms.AlbumForm(request.POST)
+
+      if form.is_valid():
+         form.save(commit=True)
+         return index(request) 
+
+   dictionary = {'title' :'Add Album', 'album_form': form}
    return render(request, 'second_app/album_form.html', context=dictionary)
 
 

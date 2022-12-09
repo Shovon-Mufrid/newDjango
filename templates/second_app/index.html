@@ -2,4 +2,19 @@
 
  {% block body_block %}
  <h3>Home Page</h3>
+
+ <h6>List Of Musician</h6>
+ 
+ <ul>
+    {% if musician_list %}
+    {% for musician in musician_list %}
+    <li>{{ musician.first_name }} {{ musician.last_name }} </li>
+    {%endfor%}
+    {% else %}
+        <h4>no musician in the list</h4>
+
+    {% endif %}
+
+ </ul>
+
  {% endblock %}
