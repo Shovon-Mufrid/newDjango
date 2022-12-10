@@ -14,7 +14,7 @@ class Musician(models.Model):
 
       # to check output data
     def __str__(self):
-     return self.first_name + " " + self.last_name + self.instrument    
+     return self.first_name + " " + self.last_name + " " + self.instrument    
 
 
 class Album(models.Model):

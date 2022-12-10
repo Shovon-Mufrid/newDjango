@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from first_app.models import Musician, Album
 from templates.second_app import forms 
+from django.db.models import Avg, Max, Min
 
 
 # Create your views here.
@@ -16,8 +17,12 @@ def index(request):
    dictionary = {'title':"Home Page", 'musician_list': musician_list}
    return render(request, 'second_app/index.html', context = dictionary)
 
-def album_list(request):
-   dictionary = {'title':"List of album"}
+def album_list(request, artist_id):
+   musician_info = Musician.objects.get(pk=artist_id)
+   album_list = Album.objects.filter(artist=artist_id).order_by("name","release_date")
+   artist_rating = Album.objects.filter(artist=artist_id).aggregate(Avg('num_starts'))
+
+   dictionary = {'title':"List of album", 'musician_info': musician_info, 'album_list': album_list, 'artist_rating': artist_rating}
    return render(request, 'second_app/album_list.html', context=dictionary)
 
 def musician_form(request):
