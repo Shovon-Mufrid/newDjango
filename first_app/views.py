@@ -38,6 +38,22 @@ def musician_form(request):
    dictionary = {'title' :'Add Musician', 'musician_form': form}
    return render(request, 'second_app/musician_form.html', context=dictionary)
 
+# EDIT MUSICIAN
+def edit_artist(request, artist_id):
+   musician_info = Musician.objects.get(pk=artist_id) #get musician form via id
+   form = forms.MusicianForm(instance=musician_info)  # it will get info all info in box #calling Form.py function
+
+   if request.method == "POST":
+      form = forms.MusicianForm(request.POST, instance=musician_info) #new information will add if posted
+
+      if form.is_valid():
+         form.save(commit = True)
+         return album_list(request,artist_id) #artist id from album_list
+
+
+   dictionary = {'edit_form':form, }
+   return render(request, 'second_app/edit_artist.html', context = dictionary)
+
 def album_form(request):
    form = forms.AlbumForm()
 
@@ -51,9 +67,36 @@ def album_form(request):
    dictionary = {'title' :'Add Album', 'album_form': form}
    return render(request, 'second_app/album_form.html', context=dictionary)
 
+# EDIT ALBUM
+def edit_album(request,album_id):
+   album_info = Album.objects.get(pk=album_id)
+   form = forms.AlbumForm(instance=album_info)
+   dictionary = {}
+   if request.method == "POST":
+      form=forms.AlbumForm(request.POST, instance=album_info)
+      
+
+      if form.is_valid():
+         form.save(commit=True)
+         dictionary.update({ 'success_text':'Successfully Updated' })
+         # return album_list(request,album_id)
+
+   dictionary.update({'edit_form': form})
+   dictionary.update({'album_id': album_id}) #for delete Function only
+   return render(request, 'second_app/edit_album.html', context=dictionary)
+
+# delete
+def delete_album(request,album_id):
+   album = Album.objects.get(pk=album_id).delete()
+   dictionary = {'delete_success': 'Album Deleted Successfully'}
+   return render(request, 'second_app/delete_album.html', context=dictionary)
 
 
 
+def delete_musician(request, artist_id):
+   musician = Musician.objects.get(pk=artist_id).delete()
+   dictionary = {'delete_success':'Musician Deleted Successfully'}
+   return render(request, 'second_app/delete_album.html', context=dictionary)
 
 
 
